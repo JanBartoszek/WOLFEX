@@ -1,0 +1,14 @@
+body
+{
+    background: url(../img/corridor.jpg);
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    justify-content: center;
+}
