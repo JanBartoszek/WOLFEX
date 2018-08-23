@@ -20,9 +20,9 @@ let mainDOM = {
         soldier.setAttribute('src', 'static/img/soldier1.png')
         let randomIndex = Math.floor(Math.random() * 4);
         soldier.style.position='absolute';
-        console.log(randomIndex)
         soldier.style.left = data.spawn[randomIndex].x;
         soldier.style.top = data.spawn[randomIndex].y;
+        soldier.style.height = data.spawn[randomIndex].size;
         document.getElementById('main-container').appendChild(soldier)
         data.soldierId = data.soldierId + 1;
     },
