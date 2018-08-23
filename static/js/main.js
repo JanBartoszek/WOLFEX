@@ -26,6 +26,7 @@ let mainDOM = {
         soldier.style.top = data.spawn[randomIndex].y;
         soldier.style.height = data.spawn[randomIndex].size;
         document.getElementById('main-container').appendChild(soldier)
+        document.getElementById('soldier' + data.soldierId).addEventListener('click', events.removeSoldier);
         mainDOM.animation(data.soldierId)
         data.soldierId = data.soldierId + 1;       
     },
@@ -47,4 +48,27 @@ let mainDOM = {
 
         move(soldier)
     },
+       
+    removeMainDOMContent : function() {
+        let mainDOM = document.getElementById('main-container')
+        mainDOM.parentNode.removeChild(mainDOM)
+    }
 }
+
+
+let events = {
+    removeSoldier : function() {
+        let elem = document.getElementById('main-container')
+        elem.removeChild(this)
+        events.killSound()
+    },
+
+    killSound : function(){
+        let audio = new Audio('/static/sounds/hit1.mp3');
+        audio.play();
+    },
+
+}
+// let mainEvents = {
+   
+// }
