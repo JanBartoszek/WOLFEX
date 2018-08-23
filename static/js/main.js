@@ -27,20 +27,20 @@ let mainDOM = {
         soldier.style.height = data.spawn[randomIndex].size;
         document.getElementById('main-container').appendChild(soldier)
         document.getElementById('soldier' + data.soldierId).addEventListener('click', events.removeSoldier);
-        mainDOM.animation(data.soldierId)
+        mainDOM.animation(data.soldierId,randomIndex)
         data.soldierId = data.soldierId + 1;       
     },
 
 
-    animation : function(id) {
+    animation : function(id,randomIndex) {
         let soldier = document.getElementById('soldier' + id)
-        console.log(soldier.getAttribute('id'))
         let limit = 0
         function move(soldier){
             if (limit < 100){
-            console.log(soldier)
             soldier.style.top = soldier.offsetTop + 3 +'px'; 
-            console.log(soldier.offsetTop)
+            if ( randomIndex != 0){
+                soldier.style.height = soldier.offsetTop / 2  +'px';
+            }
             setTimeout(move, 50, soldier)
             limit += 1
             }
