@@ -22,6 +22,7 @@ let mainDOM = {
         soldier.style.position='absolute';
         soldier.style.left = data.spawn[randomIndex].x;
         soldier.style.top = data.spawn[randomIndex].y;
+        soldier.style.height = data.spawn[randomIndex].size;
         document.getElementById('main-container').appendChild(soldier)
         document.getElementById('soldier' + data.soldierId).addEventListener('click', events.removeSoldier);
         data.soldierId = data.soldierId + 1;
