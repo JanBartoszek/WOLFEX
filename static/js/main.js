@@ -10,8 +10,10 @@ let mainDOM = {
 
 
     createSoldiers : function() {
-        setInterval(this.createSoldier, 1000)
+        this.createSoldier()
+        setInterval(this.createSoldier, 1000)   
     },
+
 
     createSoldier : function() {
         let soldier = document.createElement('img')
@@ -24,17 +26,25 @@ let mainDOM = {
         soldier.style.top = data.spawn[randomIndex].y;
         soldier.style.height = data.spawn[randomIndex].size;
         document.getElementById('main-container').appendChild(soldier)
-        data.soldierId = data.soldierId + 1;
+        mainDOM.animation(data.soldierId)
+        data.soldierId = data.soldierId + 1;       
     },
 
 
+    animation : function(id) {
+        let soldier = document.getElementById('soldier' + id)
+        console.log(soldier.getAttribute('id'))
+        let limit = 0
+        function move(soldier){
+            if (limit < 100){
+            console.log(soldier)
+            soldier.style.top = soldier.offsetTop + 3 +'px'; 
+            console.log(soldier.offsetTop)
+            setTimeout(move, 50, soldier)
+            limit += 1
+            }
+        }
 
-    removeMainDOMContent : function() {
-        let mainDOM = document.getElementById('main-container')
-        mainDOM.parentNode.removeChild(mainDOM)
-    }
+        move(soldier)
+    },
 }
-
-// let mainEvents = {
-   
-// }
