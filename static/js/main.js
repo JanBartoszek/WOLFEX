@@ -5,6 +5,7 @@ let mainDOM = {
         mainContainer.setAttribute('id', 'main-container')
         document.body.appendChild(mainContainer)
         this.changeBackground()
+        this.createCounter()
         this.createSoldiers()
     },
 
@@ -17,6 +18,17 @@ let mainDOM = {
         document.body.style.backgroundSize = "cover"
     },
 
+
+    createCounter : function(){
+        let counter = document.createElement('div')
+        counter.setAttribute('id', 'counter')
+        document.getElementById('main-container').appendChild(counter)
+        document.getElementById('counter').innerHTML = 'Score: ' + data.score
+    },
+
+    updateCounter : function(){
+        document.getElementById('counter').innerHTML = 'Score: ' + data.score
+    },
 
     createSoldiers : function() {
         this.createSoldier()
@@ -101,12 +113,14 @@ let mainDOM = {
 
 let events = {
     removeSoldier : function() {
+        data.score += 1
+        mainDOM.updateCounter();
         let elem = document.getElementById('main-container')
         elem.removeChild(this)
         events.killSound()
     },
 
-    
+
     killSound : function(){
         let audio = new Audio('/static/sounds/hit1.mp3');
         audio.play();

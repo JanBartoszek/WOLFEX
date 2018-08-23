@@ -21,7 +21,7 @@ let gameoverDOM = {
     },
 
     nextGame : function() {
-        if(confirm('Play again?')){
+        if(confirm('You have managed to unlive ' + data.score + ' bad guys. Wish to play again?')){
             menuDOM.createElements()
     } 
     }
