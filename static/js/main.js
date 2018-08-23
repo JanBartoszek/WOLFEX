@@ -21,6 +21,7 @@ let mainDOM = {
         soldier.setAttribute('id', 'soldier' + data.soldierId)
         soldier.setAttribute('src', 'static/img/soldier1.png')
         let randomIndex = Math.floor(Math.random() * 4);
+        // let randomIndex = 3
         soldier.style.position='absolute';
         soldier.style.left = data.spawn[randomIndex].x;
         soldier.style.top = data.spawn[randomIndex].y;
@@ -35,6 +36,7 @@ let mainDOM = {
     animation : function(id,randomIndex) {
         let soldier = document.getElementById('soldier' + id)
         let limit = 0
+
         function move(soldier){
             if (limit < 100){
             soldier.style.top = soldier.offsetTop + 3 +'px'; 
@@ -46,8 +48,37 @@ let mainDOM = {
             }
         }
 
+        function checkBottomPosition(soldier){
+            let coords = soldier.getBoundingClientRect()
+            if (coords.bottom > 755 && randomIndex == 0 ){
+                mainDOM.gameover()
+            }
+            if (coords.bottom > 715 && randomIndex == 1 ){
+                mainDOM.gameover()
+
+            }
+            if (coords.bottom > 715 && randomIndex == 2 ){
+                mainDOM.gameover()
+
+            }
+            if (coords.bottom > 715 && randomIndex == 3 ){
+                mainDOM.gameover()
+
+            }
+            if (limit < 100){
+                setTimeout(checkBottomPosition, 50, soldier)
+            }
+        }
+
+        checkBottomPosition(soldier)
         move(soldier)
     },
+
+    gameover : function (){
+        this.removeMainDOMContent()
+        gameoverDOM.changeBackground()
+    },
+
        
     removeMainDOMContent : function() {
         let mainDOM = document.getElementById('main-container')
@@ -55,6 +86,20 @@ let mainDOM = {
     }
 }
 
+
+let gameoverDOM = {
+
+    changeBackground : function(){
+        document.body.style.background = "url('https://media.giphy.com/media/3oFyDqkwbxghpBHlaE/giphy.gif')"
+        document.body.style.backgroundPosition = "center center"
+        document.body.style.backgroundRepeat = "no repeat"
+        document.body.style.backgroundAttachment = "fixed"
+        document.body.style.backgroundSize = "cover"
+        let audio = new Audio('/static/sounds/you-died.mp3');
+        audio.play();
+    }
+
+}
 
 let events = {
     removeSoldier : function() {
