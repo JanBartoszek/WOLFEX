@@ -20,13 +20,12 @@ let mainDOM = {
         soldier.setAttribute('src', 'static/img/soldier1.png')
         let randomIndex = Math.floor(Math.random() * 4);
         soldier.style.position='absolute';
-        console.log(randomIndex)
         soldier.style.left = data.spawn[randomIndex].x;
         soldier.style.top = data.spawn[randomIndex].y;
         document.getElementById('main-container').appendChild(soldier)
+        document.getElementById('soldier' + data.soldierId).addEventListener('click', events.removeSoldier);
         data.soldierId = data.soldierId + 1;
     },
-
 
 
     removeMainDOMContent : function() {
@@ -35,6 +34,20 @@ let mainDOM = {
     }
 }
 
+
+let events = {
+    removeSoldier : function() {
+        let elem = document.getElementById('main-container')
+        elem.removeChild(this)
+        events.killSound()
+    },
+
+    killSound : function(){
+        let audio = new Audio('/static/sounds/hit1.mp3');
+        audio.play();
+    },
+
+}
 // let mainEvents = {
    
 // }
