@@ -4,14 +4,24 @@ let mainDOM = {
         mainContainer.setAttribute('class', 'container')
         mainContainer.setAttribute('id', 'main-container')
         document.body.appendChild(mainContainer)
+        this.changeBackground()
         this.createSoldiers()
+    },
 
+
+    changeBackground : function(){
+        document.body.style.background = "url(/static/img/corridor.jpg)"
+        document.body.style.backgroundPosition = "center center"
+        document.body.style.backgroundRepeat = "no repeat"
+        document.body.style.backgroundAttachment = "fixed"
+        document.body.style.backgroundSize = "cover"
     },
 
 
     createSoldiers : function() {
         this.createSoldier()
-        setInterval(this.createSoldier, 1000)   
+        let intervalId = setInterval(this.createSoldier, 1000)   
+        data.intervalId = intervalId
     },
 
 
@@ -74,32 +84,20 @@ let mainDOM = {
         move(soldier)
     },
 
+
     gameover : function (){
+        clearInterval(data.intervalId);
         this.removeMainDOMContent()
-        gameoverDOM.changeBackground()
+        gameoverDOM.gameover()
     },
 
-       
+
     removeMainDOMContent : function() {
         let mainDOM = document.getElementById('main-container')
         mainDOM.parentNode.removeChild(mainDOM)
     }
 }
 
-
-let gameoverDOM = {
-
-    changeBackground : function(){
-        document.body.style.background = "url('https://media.giphy.com/media/3oFyDqkwbxghpBHlaE/giphy.gif')"
-        document.body.style.backgroundPosition = "center center"
-        document.body.style.backgroundRepeat = "no repeat"
-        document.body.style.backgroundAttachment = "fixed"
-        document.body.style.backgroundSize = "cover"
-        let audio = new Audio('/static/sounds/you-died.mp3');
-        audio.play();
-    }
-
-}
 
 let events = {
     removeSoldier : function() {
@@ -108,12 +106,11 @@ let events = {
         events.killSound()
     },
 
+    
     killSound : function(){
         let audio = new Audio('/static/sounds/hit1.mp3');
         audio.play();
     },
 
 }
-// let mainEvents = {
-   
-// }
+

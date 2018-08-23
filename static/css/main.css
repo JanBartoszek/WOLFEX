@@ -11,8 +11,28 @@ body
     margin: 0;
     display: inline;
     justify-content: center;
+    cursor: crosshair;
+
 }
 body{
     height: 100%;
     overflow: hidden;
+}
+
+#play-button {
+    position: absolute;
+    top: 40%;
+    right: 15%;
+    letter-spacing: 10px;
+    font-family: monospace;
+    font-size: 5em;
+    animation: blinker 1s linear infinite;
+    text-shadow: 5px 5px 30px red;
+}
+
+
+@keyframes blinker {
+    50% {
+    opacity: 0;
+    }
 }
